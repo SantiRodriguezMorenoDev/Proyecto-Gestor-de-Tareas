@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador de Tareas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>Administrador de Tareas</h1>
+
+    <div class="container">
+        <form id="taskForm">
+            <input type="text" id="taskName" placeholder="Título de la tarea" required>
+            <textarea id="taskDesc" placeholder="Descripción (opcional)" rows="2"></textarea>
+            <input type="date" id="taskDate">
+            <button type="submit">Agregar tarea</button>
+        </form>
+
+        <input type="text" id="search" class="search" placeholder="Buscar tareas...">
+
+        <ul id="taskList"></ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
