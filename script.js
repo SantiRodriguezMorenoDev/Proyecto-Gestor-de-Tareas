@@ -89,6 +89,11 @@ window.addEventListener("load", cargarDesdeLocalStorage);
 const btnMostrarCompletadas = document.getElementById("btnCompletadas");
 let mostrandoSoloCompletadas = false;
 
+document.addEventListener("DOMContentLoaded", function() {
+    btnMostrarCompletadas.classList.add("modo-todas");
+    btnMostrarCompletadas.textContent = "Mostrar completadas";
+});
+
 btnMostrarCompletadas.addEventListener("click", function () {
     mostrandoSoloCompletadas = !mostrandoSoloCompletadas;
     
@@ -96,9 +101,10 @@ btnMostrarCompletadas.addEventListener("click", function () {
         const filtradas = tareas.filter(t => t.completada === true);
         mostrarLista(filtradas);
         btnMostrarCompletadas.textContent = "Mostrar todas";
+        btnMostrarCompletadas.classList.remove("modo-todas");
     } else {
         mostrarLista(tareas);
         btnMostrarCompletadas.textContent = "Mostrar completadas";
+        btnMostrarCompletadas.classList.add("modo-todas");
     }
-    btnMostrarCompletadas.classList.toggle("modo-todas", !mostrandoSoloCompletadas);
 });

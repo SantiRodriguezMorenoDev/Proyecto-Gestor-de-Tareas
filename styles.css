@@ -112,15 +112,12 @@ small {
     background-color: green;
 }
 
-#btnCompletadas {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 15px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+#btnCompletadas.modo-todas {
+    background-color: #2196F3;
+}
+
+#btnCompletadas.modo-todas:hover {
+    background-color: #1976D2;
 }
 
 #btnCompletadas:hover {
@@ -132,10 +129,13 @@ small {
     transform: scale(0.98);
 }
 
-#btnCompletadas.modo-todas {
-    background-color: #2196F3;
-}
-
-#btnCompletadas.modo-todas:hover {
-    background-color: #1976D2;
+#btnCompletadas {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
