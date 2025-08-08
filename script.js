@@ -1,7 +1,5 @@
 ////Administrador de Tareas con Guardado en el Navegador
 //
-//Debe tener buscador en tiempo real para filtrar tareas.
-//
 //Los datos deben persistir con localStorage (si recargas la página, no se pierden).
 //
 //Opcional para subir de nivel:
@@ -15,15 +13,21 @@ const nameDesc = document.getElementById("taskDesc");
 const nameDate = document.getElementById("taskDate");
 const botonAgregar = document.getElementById("boton");
 const taskList = document.getElementById("taskList");
+const searchInput = document.getElementById("search");
 
-let tareas = []; // Cambié el nombre para no confundir
+let tareas = [];
 
 botonAgregar.addEventListener("click", function (event) {
+    event.preventDefault();
 
     const nombreTarea = nameTask.value.trim();
     const descTarea = nameDesc.value.trim();
     const fechaTarea = nameDate.value;
-    event.preventDefault();
+
+    if (nombreTarea === "") {
+        alert("Por favor ingresa un nombre para la tarea.");
+        return;
+    }
 
     const nuevaTarea = {
         nombre: nombreTarea,
@@ -33,35 +37,44 @@ botonAgregar.addEventListener("click", function (event) {
     };
 
     tareas.push(nuevaTarea);
-    mostrarLista();
+    mostrarLista(tareas);
 
     nameTask.value = "";
     nameDesc.value = "";
     nameDate.value = "";
 });
 
-function mostrarLista() {
+function mostrarLista(lista) {
     taskList.innerHTML = "";
-    tareas.forEach((tarea) => {
+    lista.forEach((tarea) => {
         const li = document.createElement("li");
         li.textContent = `${tarea.nombre} - ${tarea.descripcion} - ${tarea.fecha}`;
         li.className = tarea.completada ? "completada" : "";
         taskList.appendChild(li);
 
         li.addEventListener("click", function () {
-        tarea.completada = !tarea.completada;
-        li.classList.toggle("completada");
+            tarea.completada = !tarea.completada;
+            li.classList.toggle("completada");
         });
 
-    li.addEventListener("dblclick", function (){
-        tareas = tareas.filter(t => t !== tarea);
-        mostrarLista();
+        li.addEventListener("dblclick", function () {
+            tareas = tareas.filter(t => t !== tarea);
+            mostrarLista(tareas);
         });
     });
-
-    
-
-    taskList.appendChild(li);
 }
 
+searchInput.addEventListener("input", function () {
+    const texto = searchInput.value.trim().toLowerCase();
 
+    if (texto === "") {
+        mostrarLista(tareas);
+        return;
+    }
+
+    const filtrado = tareas.filter(est =>
+        est.nombre.toLowerCase().startsWith(texto)
+    );
+
+    mostrarLista(filtrado);
+});
