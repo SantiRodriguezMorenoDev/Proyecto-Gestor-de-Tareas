@@ -1,9 +1,5 @@
 ////Administrador de Tareas con Guardado en el Navegador
 //
-//Los datos deben persistir con localStorage (si recargas la página, no se pierden).
-//
-//Opcional para subir de nivel:
-//
 //Filtrar por tareas completadas o pendientes.
 //
 //Ordenar por fecha límite.
@@ -89,3 +85,20 @@ searchInput.addEventListener("input", function () {
 });
 
 window.addEventListener("load", cargarDesdeLocalStorage);
+
+const btnMostrarCompletadas = document.getElementById("btnCompletadas");
+let mostrandoSoloCompletadas = false;
+
+btnMostrarCompletadas.addEventListener("click", function () {
+    mostrandoSoloCompletadas = !mostrandoSoloCompletadas;
+    
+    if (mostrandoSoloCompletadas) {
+        const filtradas = tareas.filter(t => t.completada === true);
+        mostrarLista(filtradas);
+        btnMostrarCompletadas.textContent = "Mostrar todas";
+    } else {
+        mostrarLista(tareas);
+        btnMostrarCompletadas.textContent = "Mostrar completadas";
+    }
+    btnMostrarCompletadas.classList.toggle("modo-todas", !mostrandoSoloCompletadas);
+});
