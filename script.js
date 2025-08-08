@@ -17,6 +17,18 @@ const searchInput = document.getElementById("search");
 
 let tareas = [];
 
+function guardarEnLocalStorage() {
+    localStorage.setItem("tareas", JSON.stringify(tareas));
+}
+
+function cargarDesdeLocalStorage() {
+    const tareasGuardadas = localStorage.getItem("tareas");
+    if (tareasGuardadas) {
+        tareas = JSON.parse(tareasGuardadas);
+        mostrarLista(tareas);
+    }
+}
+
 botonAgregar.addEventListener("click", function (event) {
     event.preventDefault();
 
@@ -37,6 +49,7 @@ botonAgregar.addEventListener("click", function (event) {
     };
 
     tareas.push(nuevaTarea);
+    guardarEnLocalStorage();
     mostrarLista(tareas);
 
     nameTask.value = "";
@@ -44,7 +57,7 @@ botonAgregar.addEventListener("click", function (event) {
     nameDate.value = "";
 });
 
-function mostrarLista(lista) {
+function mostrarLista(lista = tareas) {
     taskList.innerHTML = "";
     lista.forEach((tarea) => {
         const li = document.createElement("li");
@@ -54,27 +67,25 @@ function mostrarLista(lista) {
 
         li.addEventListener("click", function () {
             tarea.completada = !tarea.completada;
-            li.classList.toggle("completada");
+            guardarEnLocalStorage();
+            mostrarLista();
         });
 
         li.addEventListener("dblclick", function () {
             tareas = tareas.filter(t => t !== tarea);
-            mostrarLista(tareas);
+            guardarEnLocalStorage();
+            mostrarLista();
         });
     });
 }
-
 searchInput.addEventListener("input", function () {
     const texto = searchInput.value.trim().toLowerCase();
-
     if (texto === "") {
         mostrarLista(tareas);
         return;
     }
-
-    const filtrado = tareas.filter(est =>
-        est.nombre.toLowerCase().startsWith(texto)
-    );
-
+    const filtrado = tareas.filter(est => est.nombre.toLowerCase().startsWith(texto));
     mostrarLista(filtrado);
 });
+
+window.addEventListener("load", cargarDesdeLocalStorage);
