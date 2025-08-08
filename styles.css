@@ -111,3 +111,31 @@ small {
 .completada {
     background-color: green;
 }
+
+#btnCompletadas {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#btnCompletadas:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+#btnCompletadas:active {
+    transform: scale(0.98);
+}
+
+#btnCompletadas.modo-todas {
+    background-color: #2196F3;
+}
+
+#btnCompletadas.modo-todas:hover {
+    background-color: #1976D2;
+}
