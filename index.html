@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrador de Tareas</title>
+
+    <!-- Fuente moderna -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Iconos Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -15,13 +21,24 @@
             <input type="text" id="taskName" placeholder="Título de la tarea" required>
             <textarea id="taskDesc" placeholder="Descripción (opcional)" rows="2"></textarea>
             <input type="date" id="taskDate">
-            <button type="submit" id ="boton">Agregar tarea</button>
-            <button type="submit" id ="btnCompletadas">Mostrar completadas</button>
+
+            <button type="submit" id="boton"><i class="fa-solid fa-plus"></i> Agregar tarea</button>
+            <button type="button" id="btnCompletadas"><i class="fa-solid fa-check"></i> Mostrar completadas</button>
+            <button type="button" id="btnOrdenarPorFecha"><i class="fa-solid fa-calendar-days"></i> Ordenar por fecha</button>
         </form>
 
         <input type="text" id="search" class="search" placeholder="Buscar tareas...">
 
-        <ul id="taskList">Lista de tareas</ul>
+        <ul id="taskList">
+            <!-- Ejemplo de tarea -->
+            <li>
+                <div class="task-header">
+                    <span><i class="fa-regular fa-circle task-icon"></i> Hola mundo!</span>
+                    <small>2025-08-08</small>
+                </div>
+                <p>Descripción de prueba</p>
+            </li>
+        </ul>
     </div>
 
     <script src="script.js"></script>
